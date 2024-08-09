@@ -1,26 +1,37 @@
 # 💚 Zerops
 
-Use this `Dockerfile`. It is multi-stage and will both build and run the production ready app.
+You can use this yml for importing a project via import wizard from the dashboard to deploy a [basic barebone project](https://github.com/zeropsio/recipe-ultra-deno).
 
-```dockerfile
-FROM denoland/deno as builder
-WORKDIR /app
-COPY . /app
-RUN deno task build
+```yaml
+project:
+  name: recipe-deno
+  tags:
+    - zerops-recipe
 
-FROM denoland/deno
-EXPOSE 8000
-COPY --from=builder /app/.ultra /app
-WORKDIR /app
-CMD ["deno", "task", "start"]
+services:
+  - hostname: app
+    type: deno@1
+    buildFromGit: https://github.com/zeropsio/recipe-ultra-deno
+    enableSubdomainAccess: true
 ```
 
-You can modify this as needed, another possible Dockerfile assumes you commit your build artifacts, or deploy locally from built files.
+Use this `zerops.yml` in root of your project. This tells Zerops how to build and run your ultra project.
 
-```dockerfile
-FROM denoland/deno
-EXPOSE 8000
-WORKDIR /app
-COPY .ultra /app
-CMD ["deno", "task", "start"]
+```yml
+zerops:
+  - setup: app
+    build:
+      base: deno@1
+      buildCommands:
+        - deno task build
+      deployFiles:
+        - .ultra/~
+    run:
+      base: deno@1
+      ports:
+        - port: 8000
+          httpSupport: true
+      start: deno task start
 ```
+
+For more information vist [Zerops Docs](https://docs.zerops.io/) and [Zerops Discord Server](https://discord.gg/xxzmJSDKPT).
