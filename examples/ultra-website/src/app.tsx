@@ -29,6 +29,7 @@ import UseServerInsertedHTMLHook from "./content/docs/use-server-inserted-html.j
 // Deployment
 import DenoDeploy from "./content/docs/deno-deploy.js";
 import Fly from "./content/docs/fly.js";
+import Zerops from "./content/docs/zerops.js";
 
 export default function App() {
   const [pathname] = useLocation();
@@ -127,6 +128,9 @@ export default function App() {
                 </Route>
                 <Route path="/fly-docker">
                   <Fly />
+                </Route>
+                <Route path="/zerops">
+                  <Zerops />
                 </Route>
                 {/* Hooks */}
                 <Route path="/hooks">
