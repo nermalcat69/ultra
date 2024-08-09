@@ -72,6 +72,7 @@ export function DocsLayout(
             <em>Deployment</em>
             <Link href="/deno-deploy">🦕 Deno Deploy</Link>
             <Link href="/fly-docker">🪰 fly.io / Docker</Link>
+            <Link href="/zerops">💚 Zerops</Link>
           </nav>
           <nav>
             <em>Hooks</em>
